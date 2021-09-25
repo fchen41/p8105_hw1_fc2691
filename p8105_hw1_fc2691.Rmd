@@ -1,0 +1,6 @@
+---
+title: "p8105_hw1_fc2691"
+author: "FC"
+date: "9/25/2021"
+output: html_document
+---
