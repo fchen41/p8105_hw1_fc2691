@@ -2,5 +2,71 @@
 title: "p8105_hw1_fc2691"
 author: "FC"
 date: "9/25/2021"
-output: html_document
+output: github_document
 ---
+
+
+```{r}
+#a random sample of size 10 from a standard Normal distribution
+random_sample_list <- rnorm(10)  
+
+# a logical vector indicating whether elements of the sample are greater than 0
+positive_elements <- random_sample_list > 0  
+
+
+df <- data.frame(
+  random = random_sample_list,
+  pov = positive_elements,
+  cha = c("a","b","c","d","e","f","g","h","i","j"),
+  fa = factor(c("a","b","c","a","b","c","a","b","c","a"))
+)
+mean(df$random)
+mean(df$pov)
+mean(df$cha)
+mean(df$fa)
+
+library(tidyverse)
+df %>%
+  pull(var = 4) %>% mean()
+
+mean(pull(df, var=1))
+
+
+#install.packages("palmerpenguins")
+data("penguins", package = "palmerpenguins")
+
+# the data in this dataset, including names / values of important variables
+names(penguins)
+
+# the size of the dataset (using nrow and ncol)
+nrow(penguins)
+ncol(penguins)
+dim(penguins)
+
+# the mean flipper length
+penguins
+mean(na.omit(penguins)$flipper_length_mm)
+
+penguins %>%
+  pull(var="flipper_length_mm") %>%
+  na.omit() %>%
+  mean()
+##GET NA
+
+#Make a scatterplot of flipper_length_mm (y) vs bill_length_mm (x); color points using the species variable (adding color = ... inside of aes in your ggplot code should help).
+
+penguins%>%
+  select("bill_length_mm", "flipper_length_mm")%>%
+  na.omit()%>%
+  ggplot(aes(x=bill_length_mm,y=flipper_length_mm))+geom_point(color = "red")
+
+ggsave("Scatterplot of penguins", device = "pdf")
+
+#Export your first scatterplot to your project directory using ggsave.
+
+
+
+```
+
+
+
