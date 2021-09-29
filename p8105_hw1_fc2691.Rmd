@@ -3,7 +3,7 @@ title: "p8105_hw1_fc2691"
 author: "FC"
 date: "9/25/2021"
 output: 
-  github_document:
+  html_document:
     toc: true
 ---
 
@@ -94,7 +94,21 @@ penguins_omit = na.omit(penguins)
 mean(pull(penguins_omit, var="flipper_length_mm"))
 
 ```
-The **penguins** dataset includes 344 rows and 8 columns. It decribes the species on island with the data about their bill length, bill depth and flipper length in mm. It also contains some "NA" which means data is missing. The mean number of flipper_length is about 200 mm.  
+The **penguins** dataset includes 344 rows and 8 columns. It decribes the species on island with the data about their bill length, bill depth and flipper length in mm. It also contains some "NA" which means data is missing. The mean number of flipper_length is about 200 mm.    
+
+### Making a Scatterplot  
+
+*Make a scatterplot of flipper_length_mm (y) vs bill_length_mm (x); color points using the species variable (adding color = ... inside of aes in your ggplot code should help). And export your first scatterplot to your project directory using ggsave.*
+
+```{r}
+
+data("penguins", package = "palmerpenguins")
+penguins_omit = na.omit(penguins)
+ggplot(penguins_omit, aes(bill_length_mm, flipper_length_mm, colour = species)) + geom_point()
+
+ggsave("./Scatterplot of penguins.pdf")
+```
+
 
 
 
