@@ -91,7 +91,7 @@ dim(penguins)
 
 
 penguins_omit = na.omit(penguins)
-mean(pull(penguins_omit, var="flipper_length_mm"))
+mean(pull(penguins_omit, var = "flipper_length_mm"))
 
 ```
 The **penguins** dataset includes 344 rows and 8 columns. It decribes the species on island with the data about their bill length, bill depth and flipper length in mm. It also contains some "NA" which means data is missing. The mean number of flipper_length is about 200 mm.    
