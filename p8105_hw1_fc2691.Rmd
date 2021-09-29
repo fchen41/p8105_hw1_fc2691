@@ -16,7 +16,7 @@ output:
 
 ```{r}
 #Create a random sample of size 10 from a standard Normal distribution
-random_list <- rnorm(10)  
+random_list <- rnorm(10, 0, 1)  
 
 # Make elements of the sample are greater than 0
 positive_elements <- random_list > 0  
@@ -72,13 +72,15 @@ Got "Warning" message when applied "as.numeric" function to character variables.
 
 ### Analyze Data in Package "palmerpenguins"  
 
-- Install.packages("palmerpenguins")  
+Install.packages("palmerpenguins")  
+
 
 *Use the following code (in your RMarkdown file) to load the penguins dataset. * 
 
 ```{r, eval=FALSE}
 data("penguins", package = "palmerpenguins")
 penguins
+summary(penguins)
 names(penguins)
 nrow(penguins)
 ncol(penguins)
@@ -86,10 +88,9 @@ dim(penguins)
 
 # mean(na.omit(penguins)$flipper_length_mm)
 
-penguins %>%
-  pull(var="flipper_length_mm") %>%
-  na.omit() %>%
-  mean()
+penguins_omit = na.omit(penguins)
+mean(pull(penguins_omit, var="flipper_length_mm"))
+
 ```
 The **penguins** dataset includes 344 rows and 8 columns. It decribes the species on island with the data about their bill length, bill depth and flipper length in mm. It also contains some "NA" which means data is missing. The mean number of flipper_length is about 200 mm.  
 
@@ -98,14 +99,20 @@ The **penguins** dataset includes 344 rows and 8 columns. It decribes the specie
 *Make a scatterplot of flipper_length_mm (y) vs bill_length_mm (x); color points using the species variable (adding color = ... inside of aes in your ggplot code should help). And export your first scatterplot to your project directory using ggsave.*
 
 ```{r}
+# data("penguins", package = "palmerpenguins")
+# penguins %>%
+#   select("bill_length_mm", "flipper_length_mm") %>%
+#   na.omit() %>%
+#   ggplot(aes(bill_length_mm, flipper_length_mm, colour = "blue")) + geom_point()
+
 data("penguins", package = "palmerpenguins")
-penguins %>%
-  select("bill_length_mm", "flipper_length_mm") %>%
-  na.omit() %>%
-  ggplot(aes(x = bill_length_mm, y = flipper_length_mm)) + geom_point(color = "blue")
+penguins_omit = na.omit(penguins)
+ggplot(penguins_omit, aes(bill_length_mm, flipper_length_mm, colour = species)) + geom_point()
+
 
 # ggsave("Scatterplot of penguins", device = "pdf")
-ggsave("Scatterplot of penguins.pdf")
+#ggsave("Scatterplot of penguins")
+ggsave("./Scatterplot of penguins.pdf")
 ```
 
 
